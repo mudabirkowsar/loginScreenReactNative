@@ -1,20 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import DrawerNavigator from './navigation/DrawerNavigator';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import LoginScreen from './screens/LoginScreen';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './screens/HomeScreen';
+import SignupScreen from './screens/SignupScreen';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <NavigationContainer>
+
+        <Stack.Navigator initialRouteName='Login'
+          options={{ headerShown: false }} >
+
+          <Stack.Screen
+            name='Login'
+            component={LoginScreen}
+            options={{ headerShown: false }} />
+
+          <Stack.Screen
+            name='Drawer'
+            component={DrawerNavigator}
+            options={{ headerShown: false }} />
+
+          <Stack.Screen 
+          name='Signup'
+          component={SignupScreen}
+          options={{headerShown: false}}
+          />
+
+        </Stack.Navigator>
+
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
