@@ -26,7 +26,7 @@ export default function SignupScreen({ navigation }) {
 
         try {
             await registerUser({ name, email, password })
-            navigation.reset({ index: 0, routes: [{ name: 'Drawer' }] })
+            navigation.reset({ index: 0, routes: [{ name: 'Login' }] })
         } catch (error) {
             Alert.alert("Login Error")
         }
