@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import EyeIcon from 'react-native-vector-icons/Feather';
-import { loginUser } from '../helper/LocalStorage';
+import { LoginUser } from '../helper/LocalStorage';
 
 export default function LoginScreen({ navigation }) {
     const [email, setEmail] = useState('');
@@ -17,7 +17,7 @@ export default function LoginScreen({ navigation }) {
         }
 
         try {
-            const user = await loginUser(email, password)
+            const response = await LoginUser(email, password);
             navigation.reset({
                 index: 0,
                 routes: [{ name: 'Drawer' }],
@@ -70,7 +70,7 @@ export default function LoginScreen({ navigation }) {
                 </TouchableOpacity>
             </View>
 
-            <TouchableOpacity onPress={() => Alert.alert('Forgot Password Pressed')}>
+            <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
                 <Text style={styles.link}>Forgot Password?</Text>
             </TouchableOpacity>
 

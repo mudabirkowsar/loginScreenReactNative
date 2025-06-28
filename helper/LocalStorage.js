@@ -1,50 +1,62 @@
+// import AsyncStorage from '@react-native-async-storage/async-storage';
+
+// const USER_KEY = 'user'
+
+// export const registerUser = async (newUser) => {
+//   try {
+//     const usersJSON = await AsyncStorage.getItem(USER_KEY)
+//     const users = usersJSON ? JSON.parse(usersJSON) : [];
+//     const existing = users.find(u => u.email === newUser.email);
+
+//     if (existing) {
+//       console.log("Error")
+//       return
+//     }
+
+//     users.push(newUser)
+//     await AsyncStorage.setItem(USER_KEY, JSON.stringify(users));
+//     return true
+
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios'
 
-const USER_KEY = 'user'
+const BASE_URL = 'https://mobile.faveodemo.com/mudabir/public';
 
-export const registerUser = async (newUser) => {
+export const LoginUser = async (email, password) => {
   try {
-    const usersJSON = await AsyncStorage.getItem(USER_KEY)
-    const users = usersJSON ? JSON.parse(usersJSON) : [];
-    const existing = users.find(u => u.email === newUser.email);
+    const url = `${BASE_URL}/v3/api/login`;
+    const response = await axios.post(url, null, {
+      params: {
+        email,
+        password,
+      },
+    })
 
-    if (existing) {
-      console.log("Error")
-      return
-    }
+    const fakeToken = `Mudabir`;
+    await AsyncStorage.setItem('auth_token', fakeToken);
 
-    users.push(newUser)
-    await AsyncStorage.setItem(USER_KEY, JSON.stringify(users));
-    return true
-
+    console.log("Login successful")
+    return response.data;
   } catch (error) {
     console.log(error)
+    throw error;
   }
 }
 
 
-export const loginUser = async (email, password) => {
+export const forgotPassword = async () => {
   try {
-    const usersJSON = await AsyncStorage.getItem(USER_KEY);
-    const users = usersJSON ? JSON.parse(usersJSON) : [];
-
-    console.log("Stored users:", users); 
-
-    const user = users.find(u => u.email === email && u.password === password);
-
-    if (!user) {
-      console.log("ERROR: No matching user");
-      throw new Error("Invalid email or password");
-    }
-
-    const fakeToken = `${user.email}Mudabir`;
-    await AsyncStorage.setItem('auth_token', fakeToken);
-    await AsyncStorage.setItem('logged_in_user', JSON.stringify(user)); // optional
-
-    return { ...user, token: fakeToken };
-
+    const url = `${BASE_URL}/api/password/email`
+    const response = await axios.post(url, null, {
+      params: { email }
+    })
+    return response;
   } catch (error) {
-    console.log("Login Function Error:", error.message);
-    throw error;
+    console.log("Error", error);
   }
-};
+}

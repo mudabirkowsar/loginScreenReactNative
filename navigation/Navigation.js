@@ -4,6 +4,7 @@ import AuthCheck from '../middleware/AuthCheck'
 import DrawerNavigator from './DrawerNavigator'
 import SignupScreen from '../screens/SignupScreen'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import ForgotPassword from '../screens/ForgotPassword'
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,11 @@ export default function Navigation() {
             <Stack.Screen
                 name='Signup'
                 component={SignupScreen}
+                options={{ headerShown: false }} />
+
+            <Stack.Screen
+                name="ForgotPassword"
+                component={ForgotPassword}
                 options={{ headerShown: false }} />
 
         </Stack.Navigator>
