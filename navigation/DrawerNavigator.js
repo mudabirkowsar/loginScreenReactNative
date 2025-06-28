@@ -5,6 +5,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import UsersScreen from '../screens/UsersScreen';
 import LogoutScreen from '../screens/LogoutScreen';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import TodoApp from '../screens/TodoApp';
 
 const Drawer = createDrawerNavigator();
 
@@ -48,6 +49,16 @@ export default function DrawerNavigator() {
         component={UsersScreen}
         options={{
           title: "Users",
+          drawerIcon: ({ color, size }) => (
+            <AntDesign name="user" color={color} size={size} />
+          )
+        }} />
+
+        <Drawer.Screen
+        name="Todo"
+        component={TodoApp}
+        options={{
+          title: "Todo",
           drawerIcon: ({ color, size }) => (
             <AntDesign name="user" color={color} size={size} />
           )
