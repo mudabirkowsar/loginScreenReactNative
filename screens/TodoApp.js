@@ -9,7 +9,7 @@ const TodoApp = () => {
     const addTask = () => {
         if (task.trim()) {
             setTodos([...todos, { id: Date.now().toString(), text: task }]);
-            setTask('');
+            setTask(''); 
         }
     };
 
