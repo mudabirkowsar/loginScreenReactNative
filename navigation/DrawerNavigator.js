@@ -6,6 +6,7 @@ import UsersScreen from '../screens/UsersScreen';
 import LogoutScreen from '../screens/LogoutScreen';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import TodoApp from '../screens/TodoApp';
+import CrudOp from '../screens/CrudOp';
 
 const Drawer = createDrawerNavigator();
 
@@ -60,7 +61,17 @@ export default function DrawerNavigator() {
         options={{
           title: "Todo",
           drawerIcon: ({ color, size }) => (
-            <AntDesign name="user" color={color} size={size} />
+            <AntDesign name="dropbox" color={color} size={size} />
+          )
+        }} />
+
+        <Drawer.Screen
+        name="CRUD"
+        component={CrudOp}
+        options={{
+          title: "CRUD",
+          drawerIcon: ({ color, size }) => (
+            <AntDesign name="antdesign" color={color} size={size} />
           )
         }} />
 

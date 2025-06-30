@@ -1,0 +1,92 @@
+[
+  {
+    "imageLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsyA44JdhHChP6kGqx36BolQq4Hn7z2yGekw&s",
+    "name": "John Doe",
+    "username": "johndoe_91",
+    "smallDescription": "Tech enthusiast and software developer.",
+    "followers": 1200,
+    "following": 180,
+    "backgroundImage": "https://images.unsplash.com/photo-1527689368864-3a821dbccc34"
+  },
+  {
+    "imageLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGUkxFiLVGXnIL-vmVrPRRwTkUeg_BI2nvdohN-KJNN6G3musMRA-c6iQQmdbngFHV5_4&usqp=CAU",
+    "name": "Emma Watson",
+    "username": "emma_codes",
+    "smallDescription": "Web designer and front-end specialist.",
+    "followers": 2100,
+    "following": 320,
+    "backgroundImage": "https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+  },
+  {
+    "imageLink": "https://st2.depositphotos.com/1006318/5909/v/450/depositphotos_59094701-stock-illustration-businessman-profile-icon.jpg",
+    "name": "Liam Smith",
+    "username": "liams_dev",
+    "smallDescription": "Python developer and open-source contributor.",
+    "followers": 980,
+    "following": 150,
+    "backgroundImage": "https://images.unsplash.com/photo-1518770660439-4636190af475"
+  },
+  {
+    "imageLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu5GX1lkI6T4INseXlhyZhaGMtq07LNid9Tw&s",
+    "name": "Olivia Brown",
+    "username": "olivia_uiux",
+    "smallDescription": "UX researcher and UI/UX designer.",
+    "followers": 1570,
+    "following": 260,
+    "backgroundImage": "https://images.unsplash.com/photo-1531988042231-d39a9cc12a9a"
+  },
+  {
+    "imageLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6qJMd4A5ZwJu4G6bnqZBEIyFOKE5RsM1TgZhxfNW79JUKUGTCOxeOAzA7zMfabDDhTZk&usqp=CAU",
+    "name": "Noah Wilson",
+    "username": "noah_codes",
+    "smallDescription": "Full stack developer and startup founder.",
+    "followers": 3000,
+    "following": 980,
+    "backgroundImage": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+  },
+  {
+    "imageLink": "https://thumbs.dreamstime.com/b/student-avatar-illustration-user-profile-icon-youth-avatar-student-avatar-illustration-simple-cartoon-user-portrait-user-profile-276189259.jpg",
+    "name": "Ava Johnson",
+    "username": "ava_j",
+    "smallDescription": "Mobile app developer and React Native expert.",
+    "followers": 2750,
+    "following": 540,
+    "backgroundImage": "https://images.unsplash.com/photo-1557682250-33bd709cbe85"
+  },
+  {
+    "imageLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNR7_r7Ur3iXZ1hhOW2KKVhyVwuxFC-2O6qMCfx12xPuPeD7GMHoF1BX6RyXrl-tAoEiY&usqp=CAU",
+    "name": "Elijah Martin",
+    "username": "elijah_martin",
+    "smallDescription": "JavaScript ninja and DevOps enthusiast.",
+    "followers": 1340,
+    "following": 300,
+    "backgroundImage": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d"
+  },
+  {
+    "imageLink": "https://randomuser.me/api/portraits/women/8.jpg",
+    "name": "Sophia Garcia",
+    "username": "sophia_g",
+    "smallDescription": "Freelancer and digital product creator.",
+    "followers": 1890,
+    "following": 410,
+    "backgroundImage": "https://images.unsplash.com/photo-1519241047957-be31d7379a5d"
+  },
+  {
+    "imageLink": "https://randomuser.me/api/portraits/men/9.jpg",
+    "name": "James Anderson",
+    "username": "james_dev",
+    "smallDescription": "Cloud architect and backend engineer.",
+    "followers": 2200,
+    "following": 630,
+    "backgroundImage": "https://images.unsplash.com/photo-1523475496153-3d6ccf0ab6ff"
+  },
+  {
+    "imageLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOk5zI97BUmL7XDRQg_swuXxpD8OQD6xqlhEAfgJ0eApkf12olHANi-TadDJG5IlJUlTI&usqp=CAU",
+    "name": "Mia Thompson",
+    "username": "mia.codes",
+    "smallDescription": "AI enthusiast and data scientist.",
+    "followers": 3100,
+    "following": 850,
+    "backgroundImage": "https://images.unsplash.com/photo-1573497019234-197f69d8187b"
+  }
+]

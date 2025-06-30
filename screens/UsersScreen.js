@@ -1,28 +1,28 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import users from "../data/users.json"
-import { ScrollView } from 'react-native-gesture-handler'
+import { Pressable, ScrollView } from 'react-native-gesture-handler'
 
 export default function UsersScreen() {
     return (
-            <ScrollView>
-                <SafeAreaView style={styles.mainContainer}>
-                    {
-                        users.map((item, key) => (
-                            <TouchableOpacity key={key}>
-                                <View style={styles.container}>
-                                    <View style={styles.card}>
-                                        <Text style={styles.name}>{item.name}</Text>
-                                        <Text style={styles.email}>{item.email}</Text>
-                                        <Text style={styles.email}>{item.phone}</Text>
-                                    </View>
+        <ScrollView>
+            <SafeAreaView style={styles.mainContainer}>
+                {
+                    users.map((item, key) => (
+                        <Pressable key={key}>
+                            <View style={styles.container}>
+                                <View style={styles.card}>
+                                    <Text style={styles.name}>{item.name}</Text>
+                                    <Text style={styles.email}>{item.email}</Text>
+                                    <Text style={styles.email}>{item.phone}</Text>
                                 </View>
-                            </TouchableOpacity>
-                        ))
-                    }
-                </SafeAreaView>
-            </ScrollView>
+                            </View>
+                        </Pressable>
+                    ))
+                }
+            </SafeAreaView>
+        </ScrollView>
     )
 }
 
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#d3d3d3",
         padding: 10,
-        marginTop:0,
+        marginTop: 0,
     },
     container: {
         // flex: 1,

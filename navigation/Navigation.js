@@ -5,6 +5,7 @@ import DrawerNavigator from './DrawerNavigator'
 import SignupScreen from '../screens/SignupScreen'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import ForgotPassword from '../screens/ForgotPassword'
+import AddUserScreen from '../screens/AddUserScreen'
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +38,12 @@ export default function Navigation() {
                 name="ForgotPassword"
                 component={ForgotPassword}
                 options={{ headerShown: false }} />
+
+            <Stack.Screen
+                name="Add User"
+                title="Add User"
+                component={AddUserScreen}
+                options={{ headerShown: true }} />
 
         </Stack.Navigator>
     )

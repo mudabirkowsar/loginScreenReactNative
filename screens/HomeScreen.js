@@ -1,103 +1,64 @@
-import { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, Pressable, FlatList, Linking } from 'react-native';
-import axios from 'axios';
+import React from 'react';
+import {
+  View,
+  Text,
+  ImageBackground,
+  StyleSheet,
+  Dimensions,
+  Platform,
+} from 'react-native';
 
-export default function HomeScreen() {
-  const API_KEY = "9b5086e7124c4efe8c8faa3066b961ab";
-  const url = `https://newsapi.org/v2/everything?q=tesla&from=2025-05-28&sortBy=publishedAt&apiKey=${API_KEY}`;
+const { width, height } = Dimensions.get('window');
 
-  const [data, setData] = useState([]);
-  const [refreshing, setRefreshing] = useState(false);
-
-  const getNewsData = async () => {
-    try {
-      const res = await axios.get(url);
-      setData(res.data.articles);
-    } catch (error) {
-      console.log("Error fetching news:", error);
-    }
-  };
-
-  useEffect(() => {
-    getNewsData();
-  }, []);
-
-  const onRefresh = async () => {
-    setRefreshing(true);
-    await getNewsData();
-    setRefreshing(false);
-  };
-
-  const renderItem = ({ item }) => (
-    <Pressable>
-      <View style={styles.newsContainer}>
-
-        <Image
-          source={{ uri: item.urlToImage || 'https://reactnative.dev/img/tiny_logo.png' }}
-          style={styles.newsImage}
-        />
-        <Text style={styles.name}>Source: {item.source.name || "Unknown"}</Text>
-        <Text style={styles.title} onPress={() => Linking.openURL(item.url)}>
-          {item.title}
-        </Text>
-        <Text style={styles.descr}>{item.description}</Text>
-        <View style={styles.authorAndDate}>
-          <Text style={styles.name}>{item.author || "Unknown"}</Text>
-          <Text style={styles.name}>{item.publishedAt}</Text>
-        </View>
-      </View>
-    </Pressable>
-  );
-
+export default function FrontPage() {
   return (
-    <FlatList
-      data={data}
-      keyExtractor={(item, index) => index.toString()}
-      renderItem={renderItem}
-      contentContainerStyle={styles.container}
-      refreshing={refreshing}
-      onRefresh={onRefresh}
-    />
+    <ImageBackground
+      source={{ uri: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb' }}
+      style={styles.background}
+      resizeMode="cover"
+    >
+      <View style={styles.overlay} />
+
+      <View style={styles.card}>
+        <Text style={styles.title}>Explore The Future</Text>
+        <Text style={styles.subtitle}>Stay updated with the latest news</Text>
+      </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-  },
-  newsContainer: {
-    padding: 10,
-    borderRadius: 10,
-    marginBottom: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    backgroundColor: '#fff',
-    elevation: 1,
-  },
-  newsImage: {
-    height: 200,
+  background: {
     width: '100%',
-    borderRadius: 10,
-    marginBottom:7
+    height: height,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0, 0, 0, 0.4)', // dark overlay
+  },
+  card: {
+    backgroundColor: 'rgba(255, 255, 255, 0.1)', // glass effect
+    padding: 30,
+    borderRadius: 20,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.3)',
+    ...(Platform.OS === 'ios' && {
+      backdropFilter: 'blur(10px)', // works in iOS with experimental settings
+    }),
   },
   title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "left",
-    marginTop: 10,
+    color: '#ffffff',
+    fontSize: 30,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 10,
   },
-  descr: {
-    fontSize: 15,
-    marginTop: 5,
+  subtitle: {
+    color: '#e0e0e0',
+    fontSize: 16,
+    textAlign: 'center',
   },
-  authorAndDate: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 20,
-  },
-  name: {
-    color: "#0000006e"
-  }
 });
