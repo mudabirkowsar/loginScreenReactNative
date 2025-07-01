@@ -8,7 +8,7 @@ import {
   Platform,
 } from 'react-native';
 
-const { width, height } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 
 export default function FrontPage() {
   return (
@@ -19,9 +19,9 @@ export default function FrontPage() {
     >
       <View style={styles.overlay} />
 
-      <View style={styles.card}>
-        <Text style={styles.title}>Explore The Future</Text>
-        <Text style={styles.subtitle}>Stay updated with the latest news</Text>
+      <View style={styles.glassCard}>
+        <Text style={styles.title}>Welcome to the Future</Text>
+        <Text style={styles.subtitle}>Clean. Minimal. Inspired by Glass.</Text>
       </View>
     </ImageBackground>
   );
@@ -36,29 +36,30 @@ const styles = StyleSheet.create({
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 0, 0.4)', // dark overlay
+    backgroundColor: 'rgba(0,0,0,0.3)',
   },
-  card: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)', // glass effect
-    padding: 30,
+  glassCard: {
+    width: '85%',
+    padding: 25,
     borderRadius: 20,
-    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.3)',
+    borderColor: 'rgba(255, 255, 255, 0.3)',
+    alignItems: 'center',
     ...(Platform.OS === 'ios' && {
-      backdropFilter: 'blur(10px)', // works in iOS with experimental settings
+      backdropFilter: 'blur(10px)', // only works on iOS
     }),
   },
   title: {
-    color: '#ffffff',
-    fontSize: 30,
+    fontSize: 26,
     fontWeight: 'bold',
-    textAlign: 'center',
+    color: '#fff',
     marginBottom: 10,
+    textAlign: 'center',
   },
   subtitle: {
-    color: '#e0e0e0',
     fontSize: 16,
+    color: '#ddd',
     textAlign: 'center',
   },
 });

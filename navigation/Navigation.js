@@ -6,6 +6,7 @@ import SignupScreen from '../screens/SignupScreen'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import ForgotPassword from '../screens/ForgotPassword'
 import AddUserScreen from '../screens/AddUserScreen'
+import ShowUserDetailScreen from '../screens/ShowUserDetailScreen'
 
 const Stack = createNativeStackNavigator();
 
@@ -41,9 +42,37 @@ export default function Navigation() {
 
             <Stack.Screen
                 name="Add User"
-                title="Add User"
                 component={AddUserScreen}
-                options={{ headerShown: true }} />
+                options={{
+                    headerShown: true,
+                    title: 'Add User', 
+                    headerStyle: {
+                        backgroundColor:"tomato",
+                    },
+                    headerTitleStyle: {
+                        color:"black" 
+                    },
+                    headerTintColor: 'black', 
+                    headerTitleAlign: 'left',
+                }}
+            />
+
+            <Stack.Screen
+                name="User Detail"
+                component={ShowUserDetailScreen}
+                options={{
+                    headerShown: true,
+                    title: 'User Detail',
+                    headerStyle: {
+                        backgroundColor:"tomato",
+                    },
+                    headerTitleStyle: {
+                        color:"black" 
+                    },
+                    headerTintColor: 'black', 
+                    headerTitleAlign: 'left', 
+                }}
+            />
 
         </Stack.Navigator>
     )

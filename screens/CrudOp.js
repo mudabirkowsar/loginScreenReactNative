@@ -3,16 +3,14 @@ import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import userData from "../data/userData.json"
 
-export default function CrudOp({navigation}) {
+export default function CrudOp({ navigation }) {
 
-    const navigateToAddPage =()=> {
-        navigation.navigate("Add User")
-    }
+
     return (
         <View style={styles.mainContainer}>
             <View style={styles.btnContainer}>
                 <Pressable style={styles.addBtn}
-                onPress={navigateToAddPage}
+                    onPress={() => navigation.navigate("Add User")}
                 >
                     <AntDesign name="adduser" color="#000" size={24} />
                 </Pressable>
@@ -23,8 +21,8 @@ export default function CrudOp({navigation}) {
                 {
                     userData.map((item, key) => (
                         <Pressable
-                        key={key}
-                            onPress={() => console.log("Card Pressed")}
+                            onPress={() => navigation.navigate("User Detail", { item })}
+                            key={key}
                             style={({ pressed }) => [
                                 styles.cardMainContainer,
                                 pressed && styles.cardPressed
@@ -64,6 +62,8 @@ export default function CrudOp({navigation}) {
 const styles = StyleSheet.create({
     mainContainer: {
         padding: 20,
+        paddingTop: 5,
+        paddingBottom: 0
     },
     btnContainer: {
         alignItems: "flex-end"
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginLeft: 10
     },
-    abc:{
-        fontWeight:"bold"
+    abc: {
+        fontWeight: "bold"
     }
 });
