@@ -1,13 +1,15 @@
 import React, { useState, useCallback } from 'react';
-import { View, Text, StyleSheet, ScrollView, Image, Pressable } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image, Pressable, TextInput } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useFocusEffect } from '@react-navigation/native';
 import { loadData } from '../helper/storage'; // Your AsyncStorage load function
 import dummyUsers from "../data/userData.json"
-
+import { Ionicons } from '@expo/vector-icons'; // Use if using Expo
 
 export default function CrudOp({ navigation }) {
     const [userData, setUserData] = useState([]);
+    const [searcheText, setSeaechText] = useState("")
+    
 
     useFocusEffect(
         useCallback(() => {
@@ -33,6 +35,17 @@ export default function CrudOp({ navigation }) {
                 <Pressable style={styles.addBtn} onPress={navigateToAddPage}>
                     <AntDesign name="adduser" color="#000" size={24} />
                 </Pressable>
+            </View>
+
+            <View style={styles.container}>
+                <Ionicons name="search" size={20} color="#555" style={styles.icon} />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Search"
+                    placeholderTextColor="#888"
+                    value={searcheText}
+                    onChangeText={setSeaechText}
+                />
             </View>
 
             <ScrollView>
@@ -156,31 +169,55 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         borderColor: "green"
     },
-    name: { 
-        fontSize: 23, 
-        fontWeight: "bold", 
-        marginBottom: 4, 
-        marginTop: 5 
+    name: {
+        fontSize: 23,
+        fontWeight: "bold",
+        marginBottom: 4,
+        marginTop: 5
     },
-    username: { 
-        fontSize: 16, 
-        color: "#0000007e" 
+    username: {
+        fontSize: 16,
+        color: "#0000007e"
     },
-    desc: { 
-        fontSize: 17, 
-        color: "#0000007d", 
-        marginTop: 10, 
-        marginLeft: 10 
+    desc: {
+        fontSize: 17,
+        color: "#0000007d",
+        marginTop: 10,
+        marginLeft: 10
     },
-    follower: { 
-        fontSize: 16, 
-        marginLeft: 10 
+    follower: {
+        fontSize: 16,
+        marginLeft: 10
     },
-    following: { 
-        fontSize: 16, 
-        marginLeft: 10 
+    following: {
+        fontSize: 16,
+        marginLeft: 10
     },
-    abc: { 
-        fontWeight: "bold" 
-    }
+    abc: {
+        fontWeight: "bold"
+    },
+
+    container: {
+        flexDirection: 'row',
+        backgroundColor: '#f0f0f0',
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        borderRadius: 25,
+        alignItems: 'center',
+        marginVertical: 10,
+        // marginHorizontal: 20,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.08,
+        shadowRadius: 4,
+        elevation: 3,
+    },
+    icon: {
+        marginRight: 10,
+    },
+    input: {
+        flex: 1,
+        fontSize: 16,
+        color: '#333',
+    },
 });

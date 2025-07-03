@@ -18,11 +18,16 @@ export default function AddUserScreen() {
   const [imageLink, setImageLink] = useState("");
   const [smallDescription, setSmallDescription] = useState("");
   const [backgroundImage, setBackgroundImage] = useState("");
-  // const [followers, setFollowers] = useState("");
-  // const [following, setFollowing] = useState("");
+  const [updatedUserr, setUpdatedUserr] = useState([])
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const followers = Math.floor(Math.random() * (1500 - 1 + 1)) + 1;
   const following = Math.floor(Math.random() * (100 - 1 + 1)) + 1;
+
+  setTimeout(() => {
+    setShowError(false)
+  }, 5000);
 
   const handleSubmit = async () => {
     if (
@@ -32,7 +37,7 @@ export default function AddUserScreen() {
       !backgroundImage ||
       !smallDescription
     ) {
-      Alert.alert("Validation Error", "Please fill in all fields.");
+      setShowError(true);
       return;
     }
 
@@ -49,14 +54,9 @@ export default function AddUserScreen() {
     try {
       const existingUser = await loadData('users') || [];
       const updatedUser = [...existingUser, newUser]
-      await saveUser('users', updatedUser);
-      console.log("User Data Submitted:", newUser);
-      Alert.alert("Success", "User added successfully!");
-      setName("");
-      setUsername("");
-      setImageLink("");
-      setBackgroundImage("");
-      setSmallDescription("");
+      setUpdatedUserr(updatedUser)
+      setModalVisible(true);
+
     } catch (error) {
       Alert.alert("Error in adding user ")
     }
@@ -69,6 +69,50 @@ export default function AddUserScreen() {
       behavior={Platform.OS === "ios" ? "padding" : undefined}
       style={styles.mainContainer}
     >
+
+      {
+        showError && (
+          <View style={styles.errContainer}>
+            <Text style={styles.errText}>⚠️ Add all the fields</Text>
+          </View>
+        )
+      }
+
+      {isModalVisible && (
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.modalTitle}>Add User</Text>
+            <Text style={styles.modalMessage}>
+              Are you sure you want to Add <Text style={{ fontWeight: 'bold' }}>{name}</Text>?
+            </Text>
+
+            <View style={styles.modalButtons}>
+              <TouchableOpacity
+                style={[styles.modalBtn, { backgroundColor: '#6c757d' }]}
+                onPress={() => setModalVisible(false)}
+              >
+                <Text style={styles.modalBtnText}>Cancel</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={[styles.modalBtn, { backgroundColor: '#78dc78' }]}
+                onPress={async () => {
+                  await saveUser('users', updatedUserr);
+                  setModalVisible(false);
+                  setName("");
+                  setUsername("");
+                  setImageLink("");
+                  setBackgroundImage("");
+                  setSmallDescription("");
+                  navigation.goBack();
+                }}
+              >
+                <Text style={[styles.modalBtnText, { color: 'black' }]}>Add</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      )}
       <Text style={styles.UserDetailText}>Enter User Details</Text>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -93,6 +137,7 @@ export default function AddUserScreen() {
             placeholder="Enter Profile Image Link"
             style={styles.input}
             onChangeText={setImageLink}
+            multiline
             value={imageLink}
             placeholderTextColor="black"
           />
@@ -101,6 +146,7 @@ export default function AddUserScreen() {
             placeholder="Enter Background Image Link"
             style={styles.input}
             onChangeText={setBackgroundImage}
+            multiline
             value={backgroundImage}
             placeholderTextColor="black"
           />
@@ -144,33 +190,38 @@ export default function AddUserScreen() {
     </KeyboardAvoidingView>
   );
 }
-
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: "#f9f9f9",
+    backgroundColor: "#f0f4f7",
     paddingHorizontal: 20,
-    paddingTop: 10,
+    paddingTop: 40,
   },
   UserDetailText: {
-    fontSize: 23,
-    fontWeight: "600",
-    marginBottom: 10,
+    fontSize: 26,
+    fontWeight: "700",
+    color: "#333",
+    textAlign: "center",
+    marginBottom: 20,
   },
   scrollContent: {
-    paddingBottom: 100,
+    paddingBottom: 120,
   },
   TextBoxView: {
     gap: 20,
   },
   input: {
-    borderWidth: 1,
-    borderColor: "gray",
-    borderRadius: 8,
-    color: "black",
+    borderWidth: 0,
+    borderRadius: 12,
     padding: 15,
     fontSize: 16,
-    backgroundColor: "#fff"
+    color: "#333",
+    backgroundColor: "#fff",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 4,
+    elevation: 2,
   },
   followerFollowingView: {
     flexDirection: "row",
@@ -185,23 +236,93 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: 70,
-    backgroundColor: 'white',
+    height: 90,
+    backgroundColor: '#f9f9f9',
     borderTopWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#ddd',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingBottom: 10,
   },
   submitButton: {
     width: "90%",
     backgroundColor: "#28a745",
-    paddingVertical: 15,
-    borderRadius: 10,
+    paddingVertical: 16,
+    borderRadius: 12,
     alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 3,
   },
   textBtn: {
     color: "white",
-    fontWeight: "bold",
+    fontWeight: "600",
+    fontSize: 18,
+  },
+
+
+  modalOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 10,
+  },
+  modalContainer: {
+    width: '85%',
+    backgroundColor: '#fff',
+    borderRadius: 15,
+    padding: 20,
+    alignItems: 'center',
+    elevation: 5,
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  modalMessage: {
+    fontSize: 16,
+    color: '#333',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    gap: 10,
+  },
+  modalBtn: {
+    flex: 1,
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  modalBtnText: {
+    color: '#fff',
+    fontWeight: 'bold',
     fontSize: 16,
   },
+
+  errContainer: {
+    backgroundColor: '#fdecea',
+    padding: 12,
+    marginVertical: 10,
+    borderRadius: 8,
+    borderLeftWidth: 5,
+    borderLeftColor: '#f44336',
+  },
+  errText: {
+    color: '#b71c1c',
+    fontSize: 15,
+    fontWeight: '500',
+  },
 });
+

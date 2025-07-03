@@ -10,7 +10,7 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <NavigationContainer>
-        <Navigation/>
+        <Navigation />
       </NavigationContainer>
     </GestureHandlerRootView>
   );

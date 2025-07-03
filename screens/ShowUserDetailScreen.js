@@ -1,24 +1,58 @@
-import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity, ScrollView } from 'react-native';
-import React from 'react';
+import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import React, { useState } from 'react';
 import { deleteUserByUsername } from '../helper/storage'; // Your delete user function
 
 export default function ShowUserDetailScreen({ route, navigation }) {
-    const { item } = route.params;
+    const [isModalVisible, setModalVisible] = useState(false);
 
+    const { item } = route.params;
+    const bgImage = item.backgroundImage
     const deleteUser = async () => {
         await deleteUserByUsername(item.username);
-        navigation.goBack();
+        setModalVisible(true);
     };
 
-    const updateUser = ()=>{
-        navigation.navigate("UpdateUser", {item})
+
+    const updateUser = () => {
+        navigation.navigate("UpdateUser", { item })
     }
 
     return (
         <View style={styles.mainContainer}>
+            {isModalVisible && (
+                <View style={styles.modalOverlay}>
+                    <View style={styles.modalContainer}>
+                        <Text style={styles.modalTitle}>Delete User</Text>
+                        <Text style={styles.modalMessage}>
+                            Are you sure you want to delete <Text style={{ fontWeight: 'bold' }}>{item.name}</Text>?
+                        </Text>
+
+                        <View style={styles.modalButtons}>
+                            <TouchableOpacity
+                                style={[styles.modalBtn, { backgroundColor: '#6c757d' }]}
+                                onPress={() => setModalVisible(false)}
+                            >
+                                <Text style={styles.modalBtnText}>Cancel</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                style={[styles.modalBtn, { backgroundColor: '#dc3545' }]}
+                                onPress={async () => {
+                                    await deleteUserByUsername(item.username);
+                                    setModalVisible(false);
+                                    navigation.goBack();
+                                }}
+                            >
+                                <Text style={styles.modalBtnText}>Delete</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+            )}
+
             <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
                 <ImageBackground
-                    source={{ uri: item.backgroundImage }}
+                    source={{ uri: bgImage }}
                     resizeMode="cover"
                     style={styles.bgImage}
                 >
@@ -113,5 +147,55 @@ const styles = StyleSheet.create({
     textBtn: { color: "white", fontWeight: "bold", fontSize: 16 },
     section: { marginTop: 20 },
     sectionTitle: { fontSize: 18, fontWeight: '600', marginBottom: 5 },
-    sectionText: { fontSize: 16, color: '#444' }
+    sectionText: { fontSize: 16, color: '#444' },
+
+
+    modalOverlay: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 10,
+    },
+    modalContainer: {
+        width: '85%',
+        backgroundColor: '#fff',
+        borderRadius: 15,
+        padding: 20,
+        alignItems: 'center',
+        elevation: 5,
+    },
+    modalTitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    modalMessage: {
+        fontSize: 16,
+        color: '#333',
+        textAlign: 'center',
+        marginBottom: 20,
+    },
+    modalButtons: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
+        gap: 10,
+    },
+    modalBtn: {
+        flex: 1,
+        paddingVertical: 12,
+        borderRadius: 8,
+        alignItems: 'center',
+    },
+    modalBtnText: {
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 16,
+    },
+
 });
