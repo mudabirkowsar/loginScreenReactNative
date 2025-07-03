@@ -17,7 +17,7 @@ export const LoginUser = async (email, password) => {
     const fakeToken = `Mudabir`;
     await AsyncStorage.setItem('auth_token', fakeToken);
 
-    console.log("Login successful")
+    // console.log("Login successful")
     return response.data;
   } catch (error) {
     console.log(error)

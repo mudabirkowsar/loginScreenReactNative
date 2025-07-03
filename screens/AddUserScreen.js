@@ -10,6 +10,7 @@ import {
   KeyboardAvoidingView,
   Platform
 } from 'react-native';
+import { loadData, saveUser } from '../helper/storage';
 
 export default function AddUserScreen() {
   const [name, setName] = useState("");
@@ -20,7 +21,7 @@ export default function AddUserScreen() {
   const [followers, setFollowers] = useState("");
   const [following, setFollowing] = useState("");
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (
       !name ||
       !username ||
@@ -34,7 +35,7 @@ export default function AddUserScreen() {
       return;
     }
 
-    const user = {
+    const newUser = {
       name,
       username,
       imageLink,
@@ -44,16 +45,24 @@ export default function AddUserScreen() {
       smallDescription,
     };
 
-    console.log("User Data Submitted:", user);
-    Alert.alert("Success", "User added successfully!");
+    try {
+      const existingUser = await loadData('users') || [];
+      const updatedUser = [...existingUser, newUser]
+      await saveUser('users', updatedUser);
+      console.log("User Data Submitted:", newUser);
+      Alert.alert("Success", "User added successfully!");
+      setName("");
+      setUsername("");
+      setImageLink("");
+      setBackgroundImage("");
+      setFollowers("");
+      setFollowing("");
+      setSmallDescription("");
+    } catch (error) {
+      Alert.alert("Error in adding user ")
+    }
 
-    setName("");
-    setUsername("");
-    setImageLink("");
-    setBackgroundImage("");
-    setFollowers("");
-    setFollowing("");
-    setSmallDescription("");
+
   };
 
   return (
