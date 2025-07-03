@@ -57,12 +57,13 @@ export default function UpdateUserScreen({ route, navigation }) {
                                         smallDescription
                                     };
                                     await updateUserByUsername(item.username, updatedUser);
-                                    setModalVisible(false);
+                                    setModalVisible(false)
                                     navigation.goBack();
                                 }}
                             >
                                 <Text style={[styles.modalBtnText, { color: 'black' }]}>Update</Text>
                             </TouchableOpacity>
+
                         </View>
                     </View>
                 </View>

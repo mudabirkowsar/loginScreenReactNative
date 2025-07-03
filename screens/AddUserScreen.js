@@ -131,6 +131,7 @@ export default function AddUserScreen() {
             onChangeText={setUsername}
             value={username}
             placeholderTextColor="black"
+            autoCapitalize='none'
           />
 
           <TextInput
