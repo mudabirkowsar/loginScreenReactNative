@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import ForgotPassword from '../screens/ForgotPassword'
 import AddUserScreen from '../screens/AddUserScreen'
 import ShowUserDetailScreen from '../screens/ShowUserDetailScreen'
+import UpdateUserScreen from '../screens/UpdateUserScreen'
 
 const Stack = createNativeStackNavigator();
 
@@ -63,6 +64,23 @@ export default function Navigation() {
                 options={{
                     headerShown: true,
                     title: 'User Detail',
+                    headerStyle: {
+                        backgroundColor:"tomato",
+                    },
+                    headerTitleStyle: {
+                        color:"black" 
+                    },
+                    headerTintColor: 'black', 
+                    headerTitleAlign: 'left', 
+                }}
+            />
+
+            <Stack.Screen
+                name="UpdateUser"
+                component={UpdateUserScreen}
+                options={{
+                    headerShown: true,
+                    title: 'Update',
                     headerStyle: {
                         backgroundColor:"tomato",
                     },

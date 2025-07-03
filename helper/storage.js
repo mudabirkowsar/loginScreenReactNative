@@ -28,3 +28,18 @@ export const deleteUserByUsername = async (usernameToDelete) => {
         console.log("❌ Error deleting user: ", error);
     }
 };
+
+export const updateUserByUsername = async (username, updatedUser) => {
+    try {
+        const users = await AsyncStorage.getItem('users');
+        let userList = users ? JSON.parse(users) : [];
+
+        const index = userList.findIndex(u => u.username === username);
+        if (index !== -1) {
+            userList[index] = updatedUser;
+            await AsyncStorage.setItem('users', JSON.stringify(userList));
+        }
+    } catch (error) {
+        console.error("Error updating user:", error);
+    }
+};

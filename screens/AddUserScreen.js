@@ -18,8 +18,11 @@ export default function AddUserScreen() {
   const [imageLink, setImageLink] = useState("");
   const [smallDescription, setSmallDescription] = useState("");
   const [backgroundImage, setBackgroundImage] = useState("");
-  const [followers, setFollowers] = useState("");
-  const [following, setFollowing] = useState("");
+  // const [followers, setFollowers] = useState("");
+  // const [following, setFollowing] = useState("");
+
+  const followers = Math.floor(Math.random() * (1500 - 1 + 1)) + 1;
+  const following = Math.floor(Math.random() * (100 - 1 + 1)) + 1;
 
   const handleSubmit = async () => {
     if (
@@ -27,8 +30,6 @@ export default function AddUserScreen() {
       !username ||
       !imageLink ||
       !backgroundImage ||
-      !followers ||
-      !following ||
       !smallDescription
     ) {
       Alert.alert("Validation Error", "Please fill in all fields.");
@@ -55,8 +56,6 @@ export default function AddUserScreen() {
       setUsername("");
       setImageLink("");
       setBackgroundImage("");
-      setFollowers("");
-      setFollowing("");
       setSmallDescription("");
     } catch (error) {
       Alert.alert("Error in adding user ")
@@ -106,7 +105,7 @@ export default function AddUserScreen() {
             placeholderTextColor="black"
           />
 
-          <View style={styles.followerFollowingView}>
+          {/* <View style={styles.followerFollowingView}>
             <TextInput
               placeholder="Followers"
               style={[styles.input, styles.flexInput]}
@@ -124,7 +123,7 @@ export default function AddUserScreen() {
               placeholderTextColor="black"
               keyboardType="number-pad"
             />
-          </View>
+          </View> */}
 
           <TextInput
             placeholder="Enter Small Description"

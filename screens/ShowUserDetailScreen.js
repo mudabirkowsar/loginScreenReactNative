@@ -4,18 +4,21 @@ import { deleteUserByUsername } from '../helper/storage'; // Your delete user fu
 
 export default function ShowUserDetailScreen({ route, navigation }) {
     const { item } = route.params;
-    const bgImage = item.backgroundImage;
 
     const deleteUser = async () => {
         await deleteUserByUsername(item.username);
-        navigation.goBack(); // Navigate back to list screen
+        navigation.goBack();
     };
+
+    const updateUser = ()=>{
+        navigation.navigate("UpdateUser", {item})
+    }
 
     return (
         <View style={styles.mainContainer}>
             <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
                 <ImageBackground
-                    source={{ uri: bgImage }}
+                    source={{ uri: item.backgroundImage }}
                     resizeMode="cover"
                     style={styles.bgImage}
                 >
@@ -62,7 +65,7 @@ export default function ShowUserDetailScreen({ route, navigation }) {
             </ScrollView>
 
             <View style={styles.btnsView}>
-                <TouchableOpacity style={styles.updateButton}>
+                <TouchableOpacity style={styles.updateButton} onPress={updateUser}>
                     <Text style={styles.textBtn}>Update</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.deleteButton} onPress={deleteUser}>
