@@ -31,16 +31,16 @@ export const deleteUserByUsername = async (usernameToDelete) => {
 };
 
 export const updateUserByUsername = async (username, updatedUser) => {
-    try {
-        const users = await AsyncStorage.getItem('users');
-        let userList = users ? JSON.parse(users) : [];
+  try {
+    const users = JSON.parse(await AsyncStorage.getItem('users')) || [];
 
-        const index = userList.findIndex(u => u.username === username);
-        if (index !== -1) {
-            userList[index] = updatedUser;
-            await AsyncStorage.setItem('users', JSON.stringify(userList));
-        }
-    } catch (error) {
-        console.error("Error updating user:", error);
-    }
+    const newUsers = users.map(user =>
+      user.username === username ? updatedUser : user
+    );
+
+    await AsyncStorage.setItem('users', JSON.stringify(newUsers));
+  } catch (error) {
+    console.error("Error updating user:", error);
+  }
 };
+

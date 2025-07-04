@@ -21,10 +21,15 @@ export default function DrawerNavigator() {
         },
         headerStyle: {
           // backgroundColor: '#0984e3',
-          backgroundColor: 'tomato'
+          // backgroundColor: 'tomato'
+          // backgroundColor:"#2dd4bf",
+          // backgroundColor:"#6d28d9" 
+          // backgroundColor:"#0f172a" 
+          // backgroundColor:"#ec4899" 
+          backgroundColor:"#374151" 
         },
-        headerTintColor: '#222',
-        // headerTintColor: '#ffe2db',
+        // headerTintColor: '#222',
+        headerTintColor: '#ffe2db',
       }}
     >
       <Drawer.Screen

@@ -8,7 +8,6 @@ export default function ShowUserDetailScreen({ route, navigation }) {
     const { item } = route.params;
     const bgImage = item.backgroundImage
     const deleteUser = async () => {
-        await deleteUserByUsername(item.username);
         setModalVisible(true);
     };
 

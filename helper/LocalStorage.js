@@ -14,11 +14,10 @@ export const LoginUser = async (email, password) => {
       },
     })
 
-    const fakeToken = `Mudabir`;
-    await AsyncStorage.setItem('auth_token', fakeToken);
-
-    // console.log("Login successful")
+    const token = response.data.data.token;
+    await AsyncStorage.setItem('auth_token', token);
     return response.data;
+
   } catch (error) {
     console.log(error)
     throw error;
