@@ -7,10 +7,13 @@ import {
   Dimensions,
   Platform,
 } from 'react-native';
+import { useTranslation } from 'react-i18next'; // ✅ Import hook
 
 const { height } = Dimensions.get('window');
 
 export default function FrontPage() {
+  const { t } = useTranslation(); // ✅ Use hook
+
   return (
     <ImageBackground
       source={{ uri: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb' }}
@@ -20,8 +23,9 @@ export default function FrontPage() {
       <View style={styles.overlay} />
 
       <View style={styles.glassCard}>
-        <Text style={styles.title}>Welcome to the Future</Text>
-        <Text style={styles.subtitle}>Clean. Minimal. Inspired by Glass.</Text>
+        {/* ✅ Translate using t("key") */}
+        <Text style={styles.title}>{t("frontpage.title")}</Text>
+        <Text style={styles.subtitle}>{t("frontpage.subtitle")}</Text>
       </View>
     </ImageBackground>
   );
@@ -47,7 +51,7 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255, 255, 255, 0.3)',
     alignItems: 'center',
     ...(Platform.OS === 'ios' && {
-      backdropFilter: 'blur(10px)', // only works on iOS
+      backdropFilter: 'blur(10px)',
     }),
   },
   title: {

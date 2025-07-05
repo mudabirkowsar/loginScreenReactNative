@@ -1,5 +1,9 @@
 {
   "change-language": "Byt språk",
   "welcome": "Välkommen till min app",
-  "name-text": "Mitt namn är Mudabir Kowsar Khanday"
+  "name-text": "Mitt namn är Mudabir Kowsar Khanday",
+  "frontpage": {
+    "title": "Välkommen till framtiden",
+    "subtitle": "Rent. Minimalistiskt. Inspirerat av glas."
+  }
 }

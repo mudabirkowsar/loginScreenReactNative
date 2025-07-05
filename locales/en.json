@@ -1,5 +1,9 @@
 {
     "change-language": "Change Language",
     "welcome" : "Welcome to my app ",
-    "name-text" : "My Name is Mudabir Kowsar Khanday" 
+    "name-text" : "My Name is Mudabir Kowsar Khanday",
+    "frontpage": {
+    "title": "Welcome to the Future",
+    "subtitle": "Clean. Minimal. Inspired by Glass."
+  }
 }
