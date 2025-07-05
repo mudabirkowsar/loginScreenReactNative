@@ -1,0 +1,82 @@
+{
+  "en": {
+    "name": "English",
+    "nativeName": "English"
+  },
+  "es": {
+    "name": "Spanish",
+    "nativeName": "Español"
+  },
+  "hi": {
+    "name": "Hindi",
+    "nativeName": "हिन्दी"
+  },
+  "ru": {
+    "name": "Russian",
+    "nativeName": "Русский"
+  },
+  "sv": {
+    "name": "Swedish",
+    "nativeName": "Svenska"
+  },
+  "fr": {
+    "name": "French",
+    "nativeName": "Français"
+  },
+  "de": {
+    "name": "German",
+    "nativeName": "Deutsch"
+  },
+  "zh": {
+    "name": "Chinese",
+    "nativeName": "中文"
+  },
+  "ja": {
+    "name": "Japanese",
+    "nativeName": "日本語"
+  },
+  "ko": {
+    "name": "Korean",
+    "nativeName": "한국어"
+  },
+  "ar": {
+    "name": "Arabic",
+    "nativeName": "العربية"
+  },
+  "it": {
+    "name": "Italian",
+    "nativeName": "Italiano"
+  },
+  "pt": {
+    "name": "Portuguese",
+    "nativeName": "Português"
+  },
+  "bn": {
+    "name": "Bengali",
+    "nativeName": "বাংলা"
+  },
+  "tr": {
+    "name": "Turkish",
+    "nativeName": "Türkçe"
+  },
+  "ur": {
+    "name": "Urdu",
+    "nativeName": "اردو"
+  },
+  "pa": {
+    "name": "Punjabi",
+    "nativeName": "ਪੰਜਾਬੀ"
+  },
+  "fa": {
+    "name": "Persian",
+    "nativeName": "فارسی"
+  },
+  "af": {
+    "name": "Afrikaans",
+    "nativeName": "Afrikaans"
+  },
+  "aa": {
+    "name": "Afar",
+    "nativeName": "Afaraf"
+  }
+}
