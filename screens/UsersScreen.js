@@ -6,6 +6,7 @@ import {
     ActivityIndicator,
     StyleSheet,
     TouchableOpacity,
+    TextInput,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
@@ -14,41 +15,39 @@ import { useNavigation } from '@react-navigation/native';
 const UserListScreen = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [page, setPage] = useState(1);
-    const [hasMore, setHasMore] = useState(true);
-    const [isFetchingMore, setIsFetchingMore] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
 
     const navigation = useNavigation();
 
-    const fetchUsers = async (pageNumber = 1) => {
+    const fetchUsers = async (query = '') => {
         try {
             const token = await AsyncStorage.getItem('auth_token');
-            if (!token) return console.warn('Token not found');
+            if (!token) {
+                console.warn('Token not found');
+                return;
+            }
 
-            const res = await axios.get(
-                `https://mobile.faveodemo.com/mudabir/public/v3/user-export-data`,
+            const response = await axios.get(
+                'https://mobile.faveodemo.com/mudabir/public/v3/user-export-data',
                 {
                     headers: { Authorization: `Bearer ${token}` },
                     params: {
                         'roles[0]': 'user',
                         'roles[1]': 'agent',
                         'sort-order': 'desc',
-                        'search-query': '',
+                        'search-query': query,
                         limit: 10,
-                        page: pageNumber,
+                        page: 1,
                     },
                 }
             );
 
-            const newUsers = res.data?.data?.data || [];
-            setUsers((prev) => (pageNumber === 1 ? newUsers : [...prev, ...newUsers]));
-            setHasMore(newUsers.length > 0);
-            console.log(users)
-        } catch (err) {
-            console.error('Fetch error:', err);
+            const fetchedUsers = response.data?.data?.data || [];
+            setUsers(fetchedUsers);
+        } catch (error) {
+            console.error('Error fetching users:', error);
         } finally {
             setLoading(false);
-            setIsFetchingMore(false);
         }
     };
 
@@ -56,17 +55,13 @@ const UserListScreen = () => {
         fetchUsers();
     }, []);
 
-    const loadMore = () => {
-        if (hasMore && !isFetchingMore) {
-            setIsFetchingMore(true);
-            const nextPage = page + 1;
-            setPage(nextPage);
-            fetchUsers(nextPage);
-        }
+    const handleSearch = (text) => {
+        setSearchQuery(text);
+        fetchUsers(text);
     };
 
     const handleCardPress = (user) => {
-        navigation.navigate('UserDetail', { user }); // Pass user to detail screen
+        navigation.navigate('UserDetail', { user });
     };
 
     const renderItem = ({ item }) => (
@@ -77,7 +72,7 @@ const UserListScreen = () => {
         </TouchableOpacity>
     );
 
-    if (loading) {
+    if (loading && users.length === 0) {
         return (
             <View style={styles.center}>
                 <ActivityIndicator size="large" color="#0000ff" />
@@ -87,22 +82,27 @@ const UserListScreen = () => {
     }
 
     return (
-        <FlatList
-            data={users}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={renderItem}
-            contentContainerStyle={styles.listContainer}
-            onEndReached={loadMore}
-            onEndReachedThreshold={0.5}
-            ListFooterComponent={
-                isFetchingMore ? (
-                    <View style={styles.footer}>
-                        <ActivityIndicator size="small" />
-                        <Text>Loading more...</Text>
+        <View style={{ flex: 1 }}>
+            <TextInput
+                style={styles.searchInput}
+                placeholder="Search by name or email"
+                placeholderTextColor="gray"
+                value={searchQuery}
+                onChangeText={handleSearch}
+            />
+
+            <FlatList
+                data={users}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={renderItem}
+                contentContainerStyle={styles.listContainer}
+                ListEmptyComponent={
+                    <View style={styles.center}>
+                        <Text>No users found</Text>
                     </View>
-                ) : null
-            }
-        />
+                }
+            />
+        </View>
     );
 };
 
@@ -117,6 +117,17 @@ const styles = StyleSheet.create({
     listContainer: {
         padding: 16,
     },
+    searchInput: {
+        height: 45,
+        marginHorizontal: 16,
+        marginBottom: 10,
+        paddingHorizontal: 12,
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        backgroundColor: '#fff',
+        marginTop: 30,
+    },
     card: {
         backgroundColor: '#f1f1f1',
         padding: 16,
@@ -127,9 +138,5 @@ const styles = StyleSheet.create({
     name: {
         fontSize: 16,
         fontWeight: 'bold',
-    },
-    footer: {
-        paddingVertical: 16,
-        alignItems: 'center',
     },
 });
