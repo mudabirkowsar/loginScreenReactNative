@@ -67,8 +67,8 @@ const UserListScreen = () => {
     const renderItem = ({ item }) => (
         <TouchableOpacity onPress={() => handleCardPress(item)} style={styles.card}>
             <Text style={styles.name}>{item.first_name} {item.last_name}</Text>
-            <Text>Email: {item.email}</Text>
-            <Text>Role: {item.role}</Text>
+            <Text style={styles.email}>Email: {item.email}</Text>
+            <Text style={styles.role}>Role: {item.role}</Text>
         </TouchableOpacity>
     );
 
@@ -82,11 +82,13 @@ const UserListScreen = () => {
     }
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={styles.container}>
+            <Text style={styles.header}>All Users</Text>
+
             <TextInput
                 style={styles.searchInput}
                 placeholder="Search by name or email"
-                placeholderTextColor="gray"
+                placeholderTextColor="#888"
                 value={searchQuery}
                 onChangeText={handleSearch}
             />
@@ -109,34 +111,68 @@ const UserListScreen = () => {
 export default UserListScreen;
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#f8f9fa',
+    },
+    header: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        marginTop: 20,
+        marginBottom: 10,
+        textAlign: 'center',
+        color: '#2c3e50',
+    },
+    searchInput: {
+        height: 48,
+        marginHorizontal: 16,
+        marginBottom: 12,
+        paddingHorizontal: 16,
+        borderRadius: 12,
+        borderWidth: 1,
+        borderColor: '#ddd',
+        backgroundColor: '#ffffff',
+        fontSize: 16,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.05,
+        shadowRadius: 2,
+        elevation: 1,
+    },
+    listContainer: {
+        paddingHorizontal: 16,
+        paddingBottom: 16,
+    },
+    card: {
+        backgroundColor: '#ffffff',
+        padding: 20,
+        marginBottom: 12,
+        borderRadius: 12,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.1,
+        shadowRadius: 6,
+        elevation: 3,
+    },
+    name: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#2c3e50',
+        marginBottom: 4,
+    },
+    email: {
+        fontSize: 14,
+        color: '#555',
+        marginBottom: 2,
+    },
+    role: {
+        fontSize: 13,
+        color: '#888',
+    },
     center: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-    },
-    listContainer: {
         padding: 16,
-    },
-    searchInput: {
-        height: 45,
-        marginHorizontal: 16,
-        marginBottom: 10,
-        paddingHorizontal: 12,
-        borderRadius: 8,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        backgroundColor: '#fff',
-        marginTop: 30,
-    },
-    card: {
-        backgroundColor: '#f1f1f1',
-        padding: 16,
-        marginBottom: 12,
-        borderRadius: 8,
-        elevation: 2,
-    },
-    name: {
-        fontSize: 16,
-        fontWeight: 'bold',
     },
 });

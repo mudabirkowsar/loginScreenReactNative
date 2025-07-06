@@ -1,9 +1,21 @@
 {
   "change-language": "Changer de langue",
   "welcome": "Bienvenue dans mon application",
-  "name-text": "Mon nom est Mudabir Kowsar Khanday",
+  "name-text": "Je m'appelle Mudabir Kowsar Khundai",
   "frontpage": {
     "title": "Bienvenue dans le futur",
-    "subtitle": "Propre. Minimal. Inspiré par le verre."
+    "subtitle": "Propre. Simple. Inspiré du verre."
+  },
+  "login": {
+    "title": "Se connecter",
+    "subtitle": "Veuillez vous connecter pour continuer",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "forgot": "Mot de passe oublié ?",
+    "button": "Se connecter",
+    "no-account": "Vous n'avez pas de compte ?",
+    "signup": "S'inscrire",
+    "error-empty": "Veuillez entrer l'e-mail et le mot de passe",
+    "error-invalid": "Échec de la connexion, e-mail ou mot de passe invalide"
   }
 }

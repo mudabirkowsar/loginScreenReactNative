@@ -11,6 +11,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import EyeIcon from 'react-native-vector-icons/Feather';
 import { LoginUser } from '../helper/LocalStorage';
+import { useTranslation } from 'react-i18next';
 
 export default function LoginScreen({ navigation }) {
     const [email, setEmail] = useState('');
@@ -26,7 +27,7 @@ export default function LoginScreen({ navigation }) {
     const handleLogin = async () => {
         if (!email || !password) {
             setShowError(true)
-            setErrMessage("Please enter both email and password")
+            setErrMessage(t("login.error-empty"))
             return;
         }
 
@@ -39,7 +40,7 @@ export default function LoginScreen({ navigation }) {
         } catch (error) {
             setShowError(true)
             console.log("Error in login:", error);
-            setErrMessage("Login Failed, Invalid email or password.")
+            setErrMessage(t("login.error-invalid"))
         }
     };
 
@@ -50,19 +51,22 @@ export default function LoginScreen({ navigation }) {
         });
     };
 
+    const {t} = useTranslation();
+
+
     return (
         <KeyboardAvoidingView
             style={styles.container}
             behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         >
 
-            <Text style={styles.heading}>Welcome Back 👋</Text>
-            <Text style={styles.subheading}>Please login to continue</Text>
+            <Text style={styles.heading}>{t("login.title")} 👋</Text>
+            <Text style={styles.subheading}>{t("login.subtitle")}</Text>
 
             <View style={styles.inputContainer}>
                 <Icon name="email" size={22} color="#888" style={styles.icon} />
                 <TextInput
-                    placeholder="Email"
+                    placeholder={t("login.email")}
                     value={email}
                     onChangeText={setEmail}
                     style={styles.input}
@@ -70,12 +74,12 @@ export default function LoginScreen({ navigation }) {
                     keyboardType="email-address"
                     autoCapitalize='none'
                 />
-            </View>
+            </View> 
 
             <View style={styles.inputContainer}>
                 <Icon name="lock" size={22} color="#888" style={styles.icon} />
                 <TextInput
-                    placeholder="Password"
+                    placeholder={t("login.password")}
                     value={password}
                     onChangeText={setPassword}
                     secureTextEntry={!showPassword}
@@ -101,16 +105,16 @@ export default function LoginScreen({ navigation }) {
             }
 
             <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
-                <Text style={styles.forgotText}>Forgot Password?</Text>
+                <Text style={styles.forgotText}>{t("login.forgot")}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.button} onPress={handleLogin}>
-                <Text style={styles.buttonText}>Login</Text>
+                <Text style={styles.buttonText}>{t("login.button")}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={openSignupScreen}>
                 <Text style={styles.signupText}>
-                    Don’t have an account? <Text style={styles.signupLink}>Sign up</Text>
+                    {t("login.no-account")} <Text style={styles.signupLink}>{t("login.signup")}</Text>
                 </Text>
             </TouchableOpacity>
         </KeyboardAvoidingView>

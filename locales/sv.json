@@ -1,9 +1,21 @@
 {
   "change-language": "Byt språk",
   "welcome": "Välkommen till min app",
-  "name-text": "Mitt namn är Mudabir Kowsar Khanday",
+  "name-text": "Jag heter Mudabir Kowsar Khundai",
   "frontpage": {
     "title": "Välkommen till framtiden",
-    "subtitle": "Rent. Minimalistiskt. Inspirerat av glas."
+    "subtitle": "Rent. Enkelt. Glasinspirerat."
+  },
+  "login": {
+    "title": "Logga in",
+    "subtitle": "Logga in för att fortsätta",
+    "email": "E-post",
+    "password": "Lösenord",
+    "forgot": "Glömt lösenord?",
+    "button": "Logga in",
+    "no-account": "Har du inget konto?",
+    "signup": "Registrera dig",
+    "error-empty": "Ange både e-post och lösenord",
+    "error-invalid": "Inloggning misslyckades, ogiltig e-post eller lösenord"
   }
 }

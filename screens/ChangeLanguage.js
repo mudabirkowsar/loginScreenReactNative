@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import i18next, { languageResources } from "../services/i18next"
 import languagesList from "../services/languagesList.json"
-import { Ionicons } from '@expo/vector-icons'  // if you have vector icons installed, or use react-native-vector-icons
+import { Ionicons } from '@expo/vector-icons' 
 
 export default function ChangeLanguage() {
   const [visible, setVisible] = useState(false)
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
 
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.3)', // dark transparent background
+    backgroundColor: 'rgba(0,0,0,0.3)',
     justifyContent: 'center',
     paddingHorizontal: 30,
   },

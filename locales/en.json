@@ -1,9 +1,21 @@
 {
-    "change-language": "Change Language",
-    "welcome" : "Welcome to my app ",
-    "name-text" : "My Name is Mudabir Kowsar Khanday",
-    "frontpage": {
+  "change-language": "Change Language",
+  "welcome": "Welcome to my app",
+  "name-text": "My name is Mudabir Kowsar Khunday",
+  "frontpage": {
     "title": "Welcome to the Future",
-    "subtitle": "Clean. Minimal. Inspired by Glass."
+    "subtitle": "Clean. Simple. Glass-Inspired."
+  },
+  "login": {
+    "title": "Login",
+    "subtitle": "Please login to continue",
+    "email": "Email",
+    "password": "Password",
+    "forgot": "Forgot Password?",
+    "button": "Login",
+    "no-account": "Don’t have an account?",
+    "signup": "Sign up",
+    "error-empty": "Please enter both email and password",
+    "error-invalid": "Login Failed, Invalid email or password."
   }
 }
