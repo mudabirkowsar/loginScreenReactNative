@@ -1,21 +1,39 @@
 {
-  "change-language": "Changer de langue",
+  "change-language": "Changer la langue",
   "welcome": "Bienvenue dans mon application",
-  "name-text": "Je m'appelle Mudabir Kowsar Khundai",
+  "name-text": "Je m'appelle Mudabir Kowsar Hundai",
   "frontpage": {
     "title": "Bienvenue dans le futur",
-    "subtitle": "Propre. Simple. Inspiré du verre."
+    "subtitle": "Propre. Simple. Inspiré par le verre."
   },
   "login": {
-    "title": "Se connecter",
+    "title": "Connexion",
     "subtitle": "Veuillez vous connecter pour continuer",
     "email": "E-mail",
     "password": "Mot de passe",
     "forgot": "Mot de passe oublié ?",
     "button": "Se connecter",
-    "no-account": "Vous n'avez pas de compte ?",
+    "no-account": "Pas de compte ?",
     "signup": "S'inscrire",
-    "error-empty": "Veuillez entrer l'e-mail et le mot de passe",
-    "error-invalid": "Échec de la connexion, e-mail ou mot de passe invalide"
-  }
+    "error-empty": "Veuillez saisir l'e-mail et le mot de passe",
+    "error-invalid": "Erreur de connexion, e-mail ou mot de passe invalide"
+  },
+  "drawer": {
+    "home": "Accueil",
+    "users": "Utilisateurs",
+    "todo": "À faire",
+    "crud": "CRUD",
+    "changeLanguage": "Changer la langue",
+    "logout": "Se déconnecter"
+  },
+  "navigation": {
+  "addUser": "Ajouter un utilisateur",
+  "userDetail": "Détail de l'utilisateur",
+  "updateUser": "Mettre à jour l'utilisateur",
+  "showDetail": "Afficher les détails",
+  "login": "Connexion",
+  "signup": "Inscription",
+  "forgotPassword": "Mot de passe oublié ?"
+}
+
 }

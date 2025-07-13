@@ -1,5 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useTranslation } from 'react-i18next';
 
 // Screens
 import LoginScreen from '../screens/LoginScreen';
@@ -28,6 +29,7 @@ const commonHeaderOptions = (title) => ({
 });
 
 export default function Navigation() {
+  const {t} = useTranslation()
   return (
     <Stack.Navigator
       initialRouteName="AuthCheck"
@@ -42,24 +44,24 @@ export default function Navigation() {
       <Stack.Screen
         name="Add User"
         component={AddUserScreen}
-        options={commonHeaderOptions('Add User')}
+        options={commonHeaderOptions(t('navigation.addUser'))}
       />
       <Stack.Screen
         name="User Detail"
         component={ShowUserDetailScreen}
-        options={commonHeaderOptions('User Detail')}
+        options={commonHeaderOptions(t('navigation.userDetail'))}
       />
       <Stack.Screen
         name="UpdateUser"
         component={UpdateUserScreen}
-        options={commonHeaderOptions('Update User')}
+        options={commonHeaderOptions(t('navigation.updateUser'))}
       />
 
       
       <Stack.Screen
         name="UserDetail"
         component={UserDetailScreen}
-        options={commonHeaderOptions('Show Detail')}
+        options={commonHeaderOptions(t('navigation.showDetail'))}
       />
     </Stack.Navigator>
   );

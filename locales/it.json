@@ -1,21 +1,39 @@
 {
   "change-language": "Cambia lingua",
   "welcome": "Benvenuto nella mia app",
-  "name-text": "Mi chiamo Mudabir Kowsar Khundai",
+  "name-text": "Mi chiamo Mudabir Kowsar Hundai",
   "frontpage": {
     "title": "Benvenuto nel futuro",
     "subtitle": "Pulito. Semplice. Ispirato al vetro."
   },
   "login": {
-    "title": "Accedi",
-    "subtitle": "Effettua il login per continuare",
+    "title": "Accesso",
+    "subtitle": "Per favore, accedi per continuare",
     "email": "Email",
     "password": "Password",
     "forgot": "Password dimenticata?",
     "button": "Accedi",
-    "no-account": "Non hai un account?",
-    "signup": "Iscriviti",
+    "no-account": "Nessun account?",
+    "signup": "Registrati",
     "error-empty": "Inserisci email e password",
-    "error-invalid": "Accesso fallito, email o password non validi"
-  }
+    "error-invalid": "Errore di accesso, email o password non valide"
+  },
+  "drawer": {
+    "home": "Home",
+    "users": "Utenti",
+    "todo": "Da fare",
+    "crud": "CRUD",
+    "changeLanguage": "Cambia lingua",
+    "logout": "Disconnetti"
+  },
+  "navigation": {
+  "addUser": "Aggiungi utente",
+  "userDetail": "Dettaglio utente",
+  "updateUser": "Aggiorna utente",
+  "showDetail": "Mostra dettagli",
+  "login": "Accesso",
+  "signup": "Registrati",
+  "forgotPassword": "Password dimenticata?"
+}
+
 }

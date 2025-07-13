@@ -13,6 +13,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import EyeIcon from 'react-native-vector-icons/Feather';
 import { registerUser } from '../helper/LocalStorage';
+import axios from 'axios';
 
 export default function SignupScreen({ navigation }) {
     const [name, setName] = useState('');
@@ -24,24 +25,64 @@ export default function SignupScreen({ navigation }) {
     const [errMessage, setErrMessage] = useState("")
     const [showError, setShowError] = useState(false)
 
+    setTimeout(() => {
+        setShowError(false)
+    }, 5000);
+
     const handleSignup = async () => {
         if (!name || !email || !password || !confirmPassword) {
-            setErrMessage("Please fill all fields")
+            setErrMessage('Please fill all fields');
+            setShowError(true);
             return;
         }
         if (password !== confirmPassword) {
-            setErrMessage("Password do not match")
+            setErrMessage('Passwords do not match');
+            setShowError(true);
             return;
         }
 
+        const nameParts = name.trim().split(' ');
+        const firstName = nameParts[0];
+        const lastName = nameParts.slice(1).join(' ') || firstName;
+
         try {
-            await registerUser({ name, email, password });
-            navigation.reset({ index: 0, routes: [{ name: 'Login' }] });
+            const url = 'https://mobile.faveodemo.com/mudabir/public/v3/user/create/api';
+
+            // API requires data as query params, so use axios params
+            const response = await axios.post(url, null, {
+                params: {
+                    first_name: firstName,
+                    last_name: lastName,
+                    email: email,
+                    scenario: 'create',
+                    category: 'requester',
+                    panel: 'client',
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.status === 200) {
+                // Successful signup
+                navigation.reset({ index: 0, routes: [{ name: 'Login' }] });
+            } else {
+                setErrMessage(response.data.message || 'Failed to create account. Try again.');
+                setShowError(true);
+            }
         } catch (error) {
-            setErrMessage("Failed to create account. Try again")
-            Alert.alert('Signup Error', 'Failed to create account. Try again.');
+            // Handle error response
+            if (error.response) {
+                // Server responded with a status other than 2xx
+                setErrMessage(error.response.data.message || 'Signup failed. Try again.');
+            } else {
+                // Network error or no response
+                setErrMessage('Network error. Please try again.');
+            }
+            setShowError(true);
         }
     };
+
 
     return (
         <KeyboardAvoidingView
@@ -50,13 +91,7 @@ export default function SignupScreen({ navigation }) {
         >
 
 
-            {
-                showError && (
-                    <View style={styles.errContainer}>
-                        <Text style={styles.errText}>⚠️ {errMessage}</Text>
-                    </View>
-                )
-            }
+
             <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', paddingHorizontal: 25 }}>
                 <Text style={styles.heading}>Create Account</Text>
 
@@ -79,6 +114,7 @@ export default function SignupScreen({ navigation }) {
                         value={email}
                         onChangeText={setEmail}
                         keyboardType="email-address"
+                        autoCapitalize='none'
                         placeholderTextColor="#aaa"
                     />
                 </View>
@@ -122,6 +158,13 @@ export default function SignupScreen({ navigation }) {
                         />
                     </TouchableOpacity>
                 </View>
+                {
+                    showError && (
+                        <View style={styles.errContainer}>
+                            <Text style={styles.errText}>⚠️ {errMessage}</Text>
+                        </View>
+                    )
+                }
 
                 <TouchableOpacity style={styles.button} onPress={handleSignup}>
                     <Text style={styles.buttonText}>Sign Up</Text>

@@ -4,18 +4,35 @@
   "name-text": "My name is Mudabir Kowsar Khanday",
   "frontpage": {
     "title": "Welcome to the Future",
-    "subtitle": "Clean. Simple. Glass-Inspired."
+    "subtitle": "Clean. Simple. Inspired by glass."
   },
   "login": {
     "title": "Login",
     "subtitle": "Please login to continue",
     "email": "Email",
     "password": "Password",
-    "forgot": "Forgot Password?",
+    "forgot": "Forgot password?",
     "button": "Login",
-    "no-account": "Don’t have an account?",
+    "no-account": "No account?",
     "signup": "Sign up",
-    "error-empty": "Please enter both email and password",
-    "error-invalid": "Login Failed, Invalid email or password."
+    "error-empty": "Please enter email and password",
+    "error-invalid": "Login error, invalid email or password"
+  },
+  "drawer": {
+    "home": "Home",
+    "users": "Users",
+    "todo": "Todo",
+    "crud": "CRUD",
+    "changeLanguage": "Change Language",
+    "logout": "Logout"
+  },
+  "navigation": {
+    "addUser": "Add User",
+    "userDetail": "User Detail",
+    "updateUser": "Update User",
+    "showDetail": "Show Detail",
+    "login": "Login",
+    "signup": "Sign Up",
+    "forgotPassword": "Forgot Password?"
   }
 }

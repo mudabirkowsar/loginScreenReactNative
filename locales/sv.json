@@ -1,21 +1,39 @@
 {
   "change-language": "Byt språk",
   "welcome": "Välkommen till min app",
-  "name-text": "Jag heter Mudabir Kowsar Khundai",
+  "name-text": "Jag heter Mudabir Kowsar Hundai",
   "frontpage": {
     "title": "Välkommen till framtiden",
-    "subtitle": "Rent. Enkelt. Glasinspirerat."
+    "subtitle": "Rent. Enkelt. Inspirerat av glas."
   },
   "login": {
     "title": "Logga in",
-    "subtitle": "Logga in för att fortsätta",
+    "subtitle": "Var god logga in för att fortsätta",
     "email": "E-post",
     "password": "Lösenord",
     "forgot": "Glömt lösenord?",
     "button": "Logga in",
-    "no-account": "Har du inget konto?",
+    "no-account": "Inget konto?",
     "signup": "Registrera dig",
-    "error-empty": "Ange både e-post och lösenord",
-    "error-invalid": "Inloggning misslyckades, ogiltig e-post eller lösenord"
-  }
+    "error-empty": "Ange e-post och lösenord",
+    "error-invalid": "Inloggningsfel, ogiltig e-post eller lösenord"
+  },
+  "drawer": {
+    "home": "Hem",
+    "users": "Användare",
+    "todo": "Att göra",
+    "crud": "CRUD",
+    "changeLanguage": "Byt språk",
+    "logout": "Logga ut"
+  },
+  "navigation": {
+  "addUser": "Lägg till användare",
+  "userDetail": "Användardetalj",
+  "updateUser": "Uppdatera användare",
+  "showDetail": "Visa detaljer",
+  "login": "Logga in",
+  "signup": "Registrera",
+  "forgotPassword": "Glömt lösenord?"
+}
+
 }

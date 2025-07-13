@@ -16,10 +16,17 @@ const UserListScreen = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
+    const [isFetchingMore, setIsFetchingMore] = useState(false);
+    const [isSearchMode, setIsSearchMode] = useState(false);
 
     const navigation = useNavigation();
 
-    const fetchUsers = async (query = '') => {
+    const fetchUsers = async (pageNum = 1, append = false) => {
+        if (!append) setLoading(true);
+        else setIsFetchingMore(true);
+
         try {
             const token = await AsyncStorage.getItem('auth_token');
             if (!token) {
@@ -35,17 +42,60 @@ const UserListScreen = () => {
                         'roles[0]': 'user',
                         'roles[1]': 'agent',
                         'sort-order': 'desc',
-                        'search-query': query,
                         limit: 10,
-                        page: 1,
+                        page: pageNum,
                     },
                 }
             );
 
             const fetchedUsers = response.data?.data?.data || [];
-            setUsers(fetchedUsers);
+
+            if (append) {
+                setUsers(prev => [...prev, ...fetchedUsers]);
+            } else {
+                setUsers(fetchedUsers);
+            }
+
+            if (fetchedUsers.length < 10) {
+                setHasMore(false);
+            }
+
         } catch (error) {
             console.error('Error fetching users:', error);
+        } finally {
+            setLoading(false);
+            setIsFetchingMore(false);
+        }
+    };
+
+    const fetchUserById = async (userId) => {
+        setLoading(true);
+        setIsSearchMode(true);
+        try {
+            const token = await AsyncStorage.getItem('auth_token');
+            if (!token) {
+                console.warn('Token not found');
+                return;
+            }
+
+            const response = await axios.get(
+                `https://mobile.faveodemo.com/mudabir/public/v3/api/get-user/view/${userId}`,
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
+
+            const user = response.data?.data;
+            if (user) {
+                setUsers([user]);
+                setHasMore(false);
+            } else {
+                setUsers([]);
+            }
+
+        } catch (error) {
+            console.error('Error fetching user by ID:', error);
+            setUsers([]);
         } finally {
             setLoading(false);
         }
@@ -57,7 +107,22 @@ const UserListScreen = () => {
 
     const handleSearch = (text) => {
         setSearchQuery(text);
-        fetchUsers(text);
+        if (text.trim() === '') {
+            setIsSearchMode(false);
+            setPage(1);
+            setHasMore(true);
+            fetchUsers(1, false);
+        } else {
+            // Treat input as user ID
+            fetchUserById(text.trim());
+        }
+    };
+
+    const fetchMoreUsers = () => {
+        if (isSearchMode || !hasMore || isFetchingMore || loading) return;
+        const nextPage = page + 1;
+        setPage(nextPage);
+        fetchUsers(nextPage, true);
     };
 
     const handleCardPress = (user) => {
@@ -71,6 +136,13 @@ const UserListScreen = () => {
             <Text style={styles.role}>Role: {item.role}</Text>
         </TouchableOpacity>
     );
+
+    const renderFooter = () =>
+        isFetchingMore ? (
+            <View style={styles.center}>
+                <ActivityIndicator size="small" color="#555" />
+            </View>
+        ) : null;
 
     if (loading && users.length === 0) {
         return (
@@ -87,21 +159,27 @@ const UserListScreen = () => {
 
             <TextInput
                 style={styles.searchInput}
-                placeholder="Search by name or email"
+                placeholder="Search by User ID"
                 placeholderTextColor="#888"
                 value={searchQuery}
                 onChangeText={handleSearch}
+                keyboardType="numeric"
             />
 
             <FlatList
                 data={users}
-                keyExtractor={(item, index) => index.toString()}
+                keyExtractor={(item, index) => item.id?.toString() || index.toString()}
                 renderItem={renderItem}
                 contentContainerStyle={styles.listContainer}
+                ListFooterComponent={renderFooter}
+                onEndReached={fetchMoreUsers}
+                onEndReachedThreshold={0.5}
                 ListEmptyComponent={
-                    <View style={styles.center}>
-                        <Text>No users found</Text>
-                    </View>
+                    !loading && (
+                        <View style={styles.center}>
+                            <Text>No users found</Text>
+                        </View>
+                    )
                 }
             />
         </View>
